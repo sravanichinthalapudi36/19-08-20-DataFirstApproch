@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DotNetDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUSTOMERTAB1">
+          <Key>
+            <PropertyRef Name="Custid" />
+          </Key>
+          <Property Name="Custid" Type="int" Nullable="false" />
+          <Property Name="Custname" Type="varchar" MaxLength="20" />
+          <Property Name="produid" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCTSTAB1">
+          <Key>
+            <PropertyRef Name="produid" />
+          </Key>
+          <Property Name="produid" Type="int" Nullable="false" />
+          <Property Name="produname" Type="varchar" MaxLength="50" />
+          <Property Name="produrate" Type="int" />
+        </EntityType>
+        <Association Name="FK_CUSTOMERTAB1_PRODUCTSTAB1">
+          <End Role="PRODUCTSTAB1" Type="Self.PRODUCTSTAB1" Multiplicity="0..1" />
+          <End Role="CUSTOMERTAB1" Type="Self.CUSTOMERTAB1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTSTAB1">
+              <PropertyRef Name="produid" />
+            </Principal>
+            <Dependent Role="CUSTOMERTAB1">
+              <PropertyRef Name="produid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DotNetDataModelStoreContainer">
+          <EntitySet Name="CUSTOMERTAB1" EntityType="Self.CUSTOMERTAB1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTSTAB1" EntityType="Self.PRODUCTSTAB1" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CUSTOMERTAB1_PRODUCTSTAB1" Association="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1">
+            <End Role="PRODUCTSTAB1" EntitySet="PRODUCTSTAB1" />
+            <End Role="CUSTOMERTAB1" EntitySet="CUSTOMERTAB1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DotNetDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUSTOMERTAB1">
+          <Key>
+            <PropertyRef Name="Custid" />
+          </Key>
+          <Property Name="Custid" Type="Int32" Nullable="false" />
+          <Property Name="Custname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="produid" Type="Int32" />
+          <NavigationProperty Name="PRODUCTSTAB1" Relationship="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1" FromRole="CUSTOMERTAB1" ToRole="PRODUCTSTAB1" />
+        </EntityType>
+        <EntityType Name="PRODUCTSTAB1">
+          <Key>
+            <PropertyRef Name="produid" />
+          </Key>
+          <Property Name="produid" Type="Int32" Nullable="false" />
+          <Property Name="produname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="produrate" Type="Int32" />
+          <NavigationProperty Name="CUSTOMERTAB1" Relationship="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1" FromRole="PRODUCTSTAB1" ToRole="CUSTOMERTAB1" />
+        </EntityType>
+        <Association Name="FK_CUSTOMERTAB1_PRODUCTSTAB1">
+          <End Role="PRODUCTSTAB1" Type="Self.PRODUCTSTAB1" Multiplicity="0..1" />
+          <End Role="CUSTOMERTAB1" Type="Self.CUSTOMERTAB1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTSTAB1">
+              <PropertyRef Name="produid" />
+            </Principal>
+            <Dependent Role="CUSTOMERTAB1">
+              <PropertyRef Name="produid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DotNetDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUSTOMERTAB1" EntityType="Self.CUSTOMERTAB1" />
+          <EntitySet Name="PRODUCTSTAB1" EntityType="Self.PRODUCTSTAB1" />
+          <AssociationSet Name="FK_CUSTOMERTAB1_PRODUCTSTAB1" Association="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1">
+            <End Role="PRODUCTSTAB1" EntitySet="PRODUCTSTAB1" />
+            <End Role="CUSTOMERTAB1" EntitySet="CUSTOMERTAB1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DotNetDataModelStoreContainer" CdmEntityContainer="DotNetDataEntities">
+          <EntitySetMapping Name="CUSTOMERTAB1">
+            <EntityTypeMapping TypeName="DotNetDataModel.CUSTOMERTAB1">
+              <MappingFragment StoreEntitySet="CUSTOMERTAB1">
+                <ScalarProperty Name="Custid" ColumnName="Custid" />
+                <ScalarProperty Name="Custname" ColumnName="Custname" />
+                <ScalarProperty Name="produid" ColumnName="produid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTSTAB1">
+            <EntityTypeMapping TypeName="DotNetDataModel.PRODUCTSTAB1">
+              <MappingFragment StoreEntitySet="PRODUCTSTAB1">
+                <ScalarProperty Name="produid" ColumnName="produid" />
+                <ScalarProperty Name="produname" ColumnName="produname" />
+                <ScalarProperty Name="produrate" ColumnName="produrate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

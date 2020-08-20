@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DotNetDataModelStoreContainer" CdmEntityContainer="DotNetDataEntities">
+    <EntitySetMapping Name="CUSTOMERTAB1">
+      <EntityTypeMapping TypeName="DotNetDataModel.CUSTOMERTAB1">
+        <MappingFragment StoreEntitySet="CUSTOMERTAB1">
+          <ScalarProperty Name="Custid" ColumnName="Custid" />
+          <ScalarProperty Name="Custname" ColumnName="Custname" />
+          <ScalarProperty Name="produid" ColumnName="produid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTSTAB1">
+      <EntityTypeMapping TypeName="DotNetDataModel.PRODUCTSTAB1">
+        <MappingFragment StoreEntitySet="PRODUCTSTAB1">
+          <ScalarProperty Name="produid" ColumnName="produid" />
+          <ScalarProperty Name="produname" ColumnName="produname" />
+          <ScalarProperty Name="produrate" ColumnName="produrate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DotNetDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CUSTOMERTAB1">
+    <Key>
+      <PropertyRef Name="Custid" />
+    </Key>
+    <Property Name="Custid" Type="int" Nullable="false" />
+    <Property Name="Custname" Type="varchar" MaxLength="20" />
+    <Property Name="produid" Type="int" />
+  </EntityType>
+  <EntityType Name="PRODUCTSTAB1">
+    <Key>
+      <PropertyRef Name="produid" />
+    </Key>
+    <Property Name="produid" Type="int" Nullable="false" />
+    <Property Name="produname" Type="varchar" MaxLength="50" />
+    <Property Name="produrate" Type="int" />
+  </EntityType>
+  <Association Name="FK_CUSTOMERTAB1_PRODUCTSTAB1">
+    <End Role="PRODUCTSTAB1" Type="Self.PRODUCTSTAB1" Multiplicity="0..1" />
+    <End Role="CUSTOMERTAB1" Type="Self.CUSTOMERTAB1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTSTAB1">
+        <PropertyRef Name="produid" />
+      </Principal>
+      <Dependent Role="CUSTOMERTAB1">
+        <PropertyRef Name="produid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DotNetDataModelStoreContainer">
+    <EntitySet Name="CUSTOMERTAB1" EntityType="Self.CUSTOMERTAB1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTSTAB1" EntityType="Self.PRODUCTSTAB1" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CUSTOMERTAB1_PRODUCTSTAB1" Association="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1">
+      <End Role="PRODUCTSTAB1" EntitySet="PRODUCTSTAB1" />
+      <End Role="CUSTOMERTAB1" EntitySet="CUSTOMERTAB1" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

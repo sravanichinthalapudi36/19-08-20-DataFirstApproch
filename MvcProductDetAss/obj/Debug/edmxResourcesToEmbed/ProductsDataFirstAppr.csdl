@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DotNetDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CUSTOMERTAB1">
+    <Key>
+      <PropertyRef Name="Custid" />
+    </Key>
+    <Property Name="Custid" Type="Int32" Nullable="false" />
+    <Property Name="Custname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="produid" Type="Int32" />
+    <NavigationProperty Name="PRODUCTSTAB1" Relationship="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1" FromRole="CUSTOMERTAB1" ToRole="PRODUCTSTAB1" />
+  </EntityType>
+  <EntityType Name="PRODUCTSTAB1">
+    <Key>
+      <PropertyRef Name="produid" />
+    </Key>
+    <Property Name="produid" Type="Int32" Nullable="false" />
+    <Property Name="produname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="produrate" Type="Int32" />
+    <NavigationProperty Name="CUSTOMERTAB1" Relationship="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1" FromRole="PRODUCTSTAB1" ToRole="CUSTOMERTAB1" />
+  </EntityType>
+  <Association Name="FK_CUSTOMERTAB1_PRODUCTSTAB1">
+    <End Role="PRODUCTSTAB1" Type="Self.PRODUCTSTAB1" Multiplicity="0..1" />
+    <End Role="CUSTOMERTAB1" Type="Self.CUSTOMERTAB1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTSTAB1">
+        <PropertyRef Name="produid" />
+      </Principal>
+      <Dependent Role="CUSTOMERTAB1">
+        <PropertyRef Name="produid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DotNetDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CUSTOMERTAB1" EntityType="Self.CUSTOMERTAB1" />
+    <EntitySet Name="PRODUCTSTAB1" EntityType="Self.PRODUCTSTAB1" />
+    <AssociationSet Name="FK_CUSTOMERTAB1_PRODUCTSTAB1" Association="Self.FK_CUSTOMERTAB1_PRODUCTSTAB1">
+      <End Role="PRODUCTSTAB1" EntitySet="PRODUCTSTAB1" />
+      <End Role="CUSTOMERTAB1" EntitySet="CUSTOMERTAB1" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
